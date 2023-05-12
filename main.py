@@ -1,6 +1,7 @@
-from Bio import SeqIO
+from Bio import SeqIO, SearchIO
+from Bio.Blast import NCBIWWW
 from Bio.Seq import Seq
-from Bio.SeqUtils import gc_fraction
+from Bio.SeqUtils import CodonAdaptationIndex, gc_fraction
 
 
 def get_nucleotides_frequency(seq: Seq) -> dict[str, int]:
@@ -47,6 +48,22 @@ def main():
     print("Protein seq: ", protein_seq)
 
     print("Codon freq: \n", get_codon_frequency(seq))
+
+    print("Getting NCBI data...")
+
+    proteins = protein_seq.split("*")
+    print("Proteins count before filtering: ", len(proteins))
+
+    # filtering
+    for i in proteins[:]:
+        if len(i) < 20:
+            proteins.remove(i)
+
+    print("Proteins count after filtering: ", len(proteins))
+    # вывел профильтрованные белки чтобы загнать их в blast
+    print("Proteins with len >= 20")
+    for p in proteins:
+        print(p)
 
 
 if __name__ == '__main__':

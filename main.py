@@ -1,6 +1,6 @@
 from Bio import SeqIO
 from Bio.Seq import Seq
-from Bio.SeqUtils import CodonUsage, gc_fraction
+from Bio.SeqUtils import gc_fraction
 
 
 def get_nucleotides_frequency(seq: Seq) -> dict[str, int]:
